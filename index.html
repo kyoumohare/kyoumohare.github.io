@@ -4,9 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
-  </script>
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <title>Sethboy</title>
   <style>
 
@@ -86,51 +84,30 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="custom.css" />
   <!-- You'll want to add the Appboy SDK here -->
-  <script type="text/javascript">
+<script type="text/javascript">
   +function(a,p,P,b,y){a.braze={};a.brazeQueue=[];for(var s="BrazeSdkMetadata DeviceProperties Card Card.prototype.dismissCard Card.prototype.removeAllSubscriptions Card.prototype.removeSubscription Card.prototype.subscribeToClickedEvent Card.prototype.subscribeToDismissedEvent Card.fromContentCardsJson ImageOnly CaptionedImage ClassicCard ControlCard ContentCards ContentCards.prototype.getUnviewedCardCount ControlMessage InAppMessage InAppMessage.SlideFrom InAppMessage.ClickAction InAppMessage.DismissType InAppMessage.OpenTarget InAppMessage.ImageStyle InAppMessage.Orientation InAppMessage.TextAlignment InAppMessage.CropType InAppMessage.prototype.closeMessage InAppMessage.prototype.removeAllSubscriptions InAppMessage.prototype.removeSubscription InAppMessage.prototype.subscribeToClickedEvent InAppMessage.prototype.subscribeToDismissedEvent InAppMessage.fromJson FullScreenMessage ModalMessage HtmlMessage SlideUpMessage User User.Genders User.NotificationSubscriptionTypes User.prototype.addAlias User.prototype.addToCustomAttributeArray User.prototype.addToSubscriptionGroup User.prototype.getUserId User.prototype.getUserId User.prototype.incrementCustomUserAttribute User.prototype.removeFromCustomAttributeArray User.prototype.removeFromSubscriptionGroup User.prototype.setCountry User.prototype.setCustomLocationAttribute User.prototype.setCustomUserAttribute User.prototype.setDateOfBirth User.prototype.setEmail User.prototype.setEmailNotificationSubscriptionType User.prototype.setFirstName User.prototype.setGender User.prototype.setHomeCity User.prototype.setLanguage User.prototype.setLastKnownLocation User.prototype.setLastName User.prototype.setPhoneNumber User.prototype.setPushNotificationSubscriptionType User.prototype.setLineId InAppMessageButton InAppMessageButton.prototype.removeAllSubscriptions InAppMessageButton.prototype.removeSubscription InAppMessageButton.prototype.subscribeToClickedEvent FeatureFlag FeatureFlag.prototype.getStringProperty FeatureFlag.prototype.getNumberProperty FeatureFlag.prototype.getBooleanProperty FeatureFlag.prototype.getImageProperty FeatureFlag.prototype.getJsonProperty FeatureFlag.prototype.getTimestampProperty Banner automaticallyShowInAppMessages hideContentCards showContentCards showInAppMessage deferInAppMessage toggleContentCards changeUser destroy getDeviceId getDeviceId initialize isPushBlocked isPushPermissionGranted isPushSupported logCardDismissal logContentCardImpressions logContentCardClick logCustomEvent logInAppMessageButtonClick logInAppMessageClick logInAppMessageHtmlClick logInAppMessageImpression logPurchase openSession requestPushPermission removeAllSubscriptions removeSubscription requestContentCardsRefresh refreshFeatureFlags requestImmediateDataFlush enableSDK isDisabled setLogger setSdkAuthenticationSignature addSdkMetadata disableSDK subscribeToContentCardsUpdates subscribeToInAppMessage subscribeToSdkAuthenticationFailures toggleLogging unregisterPush wipeData handleBrazeAction subscribeToFeatureFlagsUpdates getAllFeatureFlags logFeatureFlagImpression requestBannersRefresh insertBanner getAllBanners subscribeToBannersUpdates isInitialized".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.braze,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.brazeQueue.push(arguments); return true}"))()}window.braze.getDeferredInAppMessage=function(){return new window.braze.InAppMessage};window.braze.getCachedContentCards=function(){return new window.braze.ContentCards};window.braze.getUser=function(){return new window.braze.User};window.braze.getFeatureFlag=function(){return new window.braze.FeatureFlag};window.braze.getBanner=function(){return new window.braze.Banner};window.braze.newBannerFromJson=function(){return new window.braze.Banner};(y=p.createElement(P)).type='text/javascript';
     y.src='https://js.appboycdn.com/web-sdk/6.0/braze.min.js';
     y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
   }(window,document,'script');
 
-
+// initialize the SDK
+//braze.initialize('YOUR-API-KEY-HERE', {
+//    baseUrl: "YOUR-SDK-ENDPOINT-HERE",
   // Initialize the Braze SDK 現在はWebinoleのToz WeB SDKを使用しています。
   braze.initialize('b02cf293-c19b-4408-8ce7-4a51b1669a41', {
   //braze.initialize('834b40ac-10fb-4f3c-ba0d-c5b9376f3100', {
     baseUrl: "sondheim.braze.com",
-    enableLogging: true, // set to `true` for debugging
+    enableLogging: false, // set to `true` for debugging
     allowUserSuppliedJavascript: false, // set to `true` to support custom HTML messages
 });
 
-  //braze.automaticallyShowInAppMessages(true); // Automatically show in-app messages when they are received
-  braze.subscribeToInAppMessage((inAppMessage) => {
-    // This is where you can handle the in-app message when it is received.
-    // For example, you can log it to the console or display it in a custom way
-    console.log("Received in-app message:", inAppMessage);
-    // If you want to show the in-app message, you can use the following method:
-    // braze.showInAppMessage(inAppMessage);
-  });
-/*
-braze.subscribeToBannersUpdates((banners) => {
-  // get this placement's banner. If it's `null` the user did not qualify for one.
-  const globalBanner = braze.getBanner("global_banner");
-  if (!globalBanner) {
-    return;
-  }
+// optionally show all in-app messages without custom handling
+braze.automaticallyShowInAppMessages();
 
-  // choose where in the DOM you want to insert the banner HTML
-  const container = document.getElementById("global-banner-container");
-
-  // Insert the banner which replaces the innerHTML of that container
-  braze.insertBanner(globalBanner, container);
-
-  // Special handling if the user is part of a Control Variant
-  if (globalBanner.isControl) {
-    // hide or collapse the container
-    container.style.display = "none";
-  }
+// if you use Content Cards
+braze.subscribeToContentCardsUpdates(function(cards){
+    // cards have been updated
 });
-
-braze.requestBannersRefresh(["global_banner", "navigation_square_banner"]); */
 </script>
 
 </head>
@@ -149,8 +126,6 @@ braze.requestBannersRefresh(["global_banner", "navigation_square_banner"]); */
 
   <br />
   <br />
-
-  <div id="global-banner-container" style="width: 100%; height: 450px;"></div>
 
   <a href="https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html" target="_blank">Link to Web SDK Documentation (Main Class Methods)</a>
 
@@ -231,8 +206,8 @@ braze.requestBannersRefresh(["global_banner", "navigation_square_banner"]); */
 
     Gender:
     <select id="gender" name="gender">
-      <option value="m">Male</option>
-      <option value="f">Female</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
       <option value="other">Other</option>
       <option value="unknown">Unknown</option>
       <option value="not applicable">Not Applicable</option>
@@ -336,34 +311,6 @@ braze.requestBannersRefresh(["global_banner", "navigation_square_banner"]); */
   <br />
   <br />
  -->
-
-<button id="toggle" type="button">Toggle Cards Feed</button>
-<button id="hide" type="button">Hide Cards Feed</button>
-<button id="show" type="button">Show Cards Feed</button>
-
-<nav>
-    <h1>Your Personalized Feed</h1>
-    <div id="feed"></div>
-</nav>
-
-<script> 
-   const toggle = document.getElementById("toggle");
-   const hide = document.getElementById("hide");
-   const show = document.getElementById("show");
-   const feed = document.getElementById("feed");
-    
-   toggle.onclick = function(){
-      braze.toggleContentCards(feed);    
-   }
-    
-   hide.onclick = function(){
-      braze.hideContentCards();
-   }
-    
-   show.onclick = function(){
-      braze.showContentCards(feed);    
-   }
-</script>
 
   <br />
   <button id="test_button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#testModal">
