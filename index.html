@@ -93,6 +93,7 @@
   }(window,document,'script');
 
 
+  // Initialize the Braze SDK 現在はWebinoleのToz WeB SDKを使用しています。
   braze.initialize('b02cf293-c19b-4408-8ce7-4a51b1669a41', {
   //braze.initialize('834b40ac-10fb-4f3c-ba0d-c5b9376f3100', {
     baseUrl: "sondheim.braze.com",
@@ -100,6 +101,15 @@
     allowUserSuppliedJavascript: false, // set to `true` to support custom HTML messages
 });
 
+  //braze.automaticallyShowInAppMessages(true); // Automatically show in-app messages when they are received
+  braze.subscribeToInAppMessage((inAppMessage) => {
+    // This is where you can handle the in-app message when it is received.
+    // For example, you can log it to the console or display it in a custom way
+    console.log("Received in-app message:", inAppMessage);
+    // If you want to show the in-app message, you can use the following method:
+    // braze.showInAppMessage(inAppMessage);
+  });
+/*
 braze.subscribeToBannersUpdates((banners) => {
   // get this placement's banner. If it's `null` the user did not qualify for one.
   const globalBanner = braze.getBanner("global_banner");
@@ -120,7 +130,7 @@ braze.subscribeToBannersUpdates((banners) => {
   }
 });
 
-braze.requestBannersRefresh(["global_banner", "navigation_square_banner"]);
+braze.requestBannersRefresh(["global_banner", "navigation_square_banner"]); */
 </script>
 
 </head>
